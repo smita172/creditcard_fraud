@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Result</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Transaction Result</h2>
+        <p><strong>Fraud Prediction:</strong> {{ result|yesno:"Fraud,Not Fraud" }}</p>
+
+        <div class="visualization">
+            <h3>Transaction Visualization</h3>
+            <img src="data:image/png;base64,{{ visualization }}" alt="Visualization">
+        </div>
+
+        <a href="{% url 'input_view' %}" class="button">Check Another Transaction</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Analysis Result</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>CSV Analysis Results</h2>
+        <table>
+            <tr>
+                <th>Transaction Details</th>
+                <th>Prediction</th>
+            </tr>
+            {% for row in data %}
+            <tr>
+                <td>{{ row.cc_num }} - {{ row.amt }} - {{ row.category }}</td>
+                <td>{{ row.is_fraud }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <div class="visualization">
+            <h3>Data Visualization</h3>
+            <img src="data:image/png;base64,{{ visualization }}" alt="Visualization">
+        </div>
+    </div>
+</body>
+</html>

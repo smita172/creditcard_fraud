@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Transaction Details</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Enter Transaction Details</h2>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <label for="trans_date_trans_time">Transaction Date & Time:</label>
+            <label>
+                <input type="datetime-local" name="trans_date_trans_time" required>
+            </label>
+
+            <label for="cc_num">Credit Card Number:</label>
+            <label>
+                <input type="text" name="cc_num" required>
+            </label>
+
+            <label for="amt">Amount:</label>
+            <label>
+                <input type="number" step="0.01" name="amt" required>
+            </label>
+
+            <label for="merchant">Merchant:</label>
+            <label>
+                <input type="text" name="merchant" required>
+            </label>
+
+            <label for="category">Category:</label>
+            <label>
+                <input type="text" name="category" required>
+            </label>
+
+            <button type="submit">Check Transaction</button>
+        </form>
+    </div>
+</body>
+</html>
