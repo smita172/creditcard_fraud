@@ -1,48 +1,42 @@
 from django import forms
 
 class PredictionForm(forms.Form):
-    trans_date_trans_time = forms.DateTimeField(
-        label='Transaction Date & Time (YYYY-MM-DD HH:MM:SS)',
-        widget=forms.TextInput(attrs={'placeholder': '2023-01-01 12:00:00'})
-    )
-    cc_num = forms.CharField(
-        label='Credit Card Number',
-        max_length=16,
-        widget=forms.TextInput(attrs={'placeholder': '1234567890123456'})
-    )
-    merchant = forms.CharField(
-        label='Merchant',
-        max_length=50,
-        widget=forms.TextInput(attrs={'placeholder': 'Merchant Name'})
-    )
     category = forms.CharField(
-        label='Category',
-        max_length=20,
-        widget=forms.TextInput(attrs={'placeholder': 'Category (e.g., shopping, food)'})
+        label='Transaction Category',
+        max_length=50
     )
-    amt = forms.FloatField(
+    amt = forms.DecimalField(
         label='Transaction Amount',
-        widget=forms.NumberInput(attrs={'placeholder': 'e.g., 100.00'})
+        max_digits=10,  # total number of digits allowed
+        decimal_places=7  # number of decimal places
     )
     city_pop = forms.IntegerField(
-        label='City Population',
-        widget=forms.NumberInput(attrs={'placeholder': 'e.g., 50000'})
+        label='City Population'
     )
-    job = forms.CharField(
-        label='Job',
-        max_length=50,
-        widget=forms.TextInput(attrs={'placeholder': 'e.g., engineer, teacher'})
+    age = forms.DecimalField(
+        label='Age',
+        max_digits=7,
+        decimal_places=6
     )
-    dob = forms.DateField(
-        label='Date of Birth (YYYY-MM-DD)',
-        widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'})
+    trans_year = forms.IntegerField(
+        label='Transaction Year'
     )
-    merch_lat = forms.FloatField(
-        label='Merchant Latitude',
-        widget=forms.NumberInput(attrs={'placeholder': 'e.g., 34.0522'})
+    trans_month = forms.IntegerField(
+        label='Transaction Month'
     )
-    merch_long = forms.FloatField(
-        label='Merchant Longitude',
-        widget=forms.NumberInput(attrs={'placeholder': '-118.2437'})
+    trans_day = forms.IntegerField(
+        label='Transaction Day'
     )
-    # Add more fields as necessary based on the features your model needs
+    trans_hour = forms.IntegerField(
+        label='Transaction Hour'
+    )
+    distance_to_merch = forms.DecimalField(
+        label='Distance to Merchant (km)',
+        max_digits=10,
+        decimal_places=7
+    )
+    gender_M = forms.ChoiceField(
+        label='Gender',
+        choices=[(1, 'Male'), (0, 'Female')],
+        widget=forms.RadioSelect
+    )

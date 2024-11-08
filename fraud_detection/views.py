@@ -1,3 +1,4 @@
+import pandas as pd
 from django.shortcuts import render
 from .forms import PredictionForm
 from .utils import model, predictions_df
