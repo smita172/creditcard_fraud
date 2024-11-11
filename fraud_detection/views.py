@@ -1,16 +1,16 @@
 import pandas as pd
 from django.shortcuts import render
 from .forms import PredictionForm
-from .utils import model, predictions_df
+from .utils import model
+# from .utils import  predictions_df
 
 def predict(request):
     prediction_result = None
     if request.method == 'POST':
         form = PredictionForm(request.POST)
         if form.is_valid():
-            # Extract data from form
-            input_data = {field: form.cleaned_data[field] for field in form.cleaned_data}
-            input_df = pd.DataFrame([input_data])
+            # Convert form data to a DataFrame using the to_dataframe method
+            input_df = form.to_dataframe()
 
             # Predict using the loaded model
             prediction = model.predict(input_df)

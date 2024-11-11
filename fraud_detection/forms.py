@@ -1,22 +1,33 @@
 from django import forms
+import pandas as pd
+from django import forms
 
 class PredictionForm(forms.Form):
-    category = forms.CharField(
+    category = forms.IntegerField(
         label='Transaction Category',
-        max_length=50
+        help_text="Enter the category of the transaction (e.g., groceries, electronics)."
     )
     amt = forms.DecimalField(
         label='Transaction Amount',
-        max_digits=10,  # total number of digits allowed
-        decimal_places=7  # number of decimal places
+        max_digits=10,
+        decimal_places=2,  # Adjusted to two decimal places for practicality
+        help_text="Enter the transaction amount (e.g., 100.00)."
+    )
+    gender = forms.ChoiceField(
+        label='Gender',
+        choices=[(1, 'Male'), (0, 'Female')],
+        widget=forms.RadioSelect,
+        help_text="Select the gender."
     )
     city_pop = forms.IntegerField(
-        label='City Population'
+        label='City Population',
+        help_text="Enter the population of the city where the transaction took place."
     )
     age = forms.DecimalField(
         label='Age',
-        max_digits=7,
-        decimal_places=6
+        max_digits=5,
+        decimal_places=2,
+        help_text="Enter the age of the person (e.g., 25.50)."
     )
     trans_year = forms.IntegerField(
         label='Transaction Year'
@@ -33,10 +44,28 @@ class PredictionForm(forms.Form):
     distance_to_merch = forms.DecimalField(
         label='Distance to Merchant (km)',
         max_digits=10,
-        decimal_places=7
+        decimal_places=2,  # Adjusted to two decimal places for practicality
+        help_text="Enter the distance in kilometers (e.g., 15.50)."
     )
-    gender_M = forms.ChoiceField(
-        label='Gender',
-        choices=[(1, 'Male'), (0, 'Female')],
-        widget=forms.RadioSelect
-    )
+
+
+    def to_dataframe(self):
+        """Converts form data to a pandas DataFrame with correct data types."""
+        data = {
+            'category': [int(self.cleaned_data['category'])],
+            'amt': [float(self.cleaned_data['amt'])],
+            'gender': [int(self.cleaned_data['gender'])],
+            'city_pop': [int(self.cleaned_data['city_pop'])],
+            'age': [float(self.cleaned_data['age'])],
+            'trans_year': [int(self.cleaned_data['trans_year'])],
+            'trans_month': [int(self.cleaned_data['trans_month'])],
+            'trans_day': [int(self.cleaned_data['trans_day'])],
+            'trans_hour': [int(self.cleaned_data['trans_hour'])],
+            'distance_to_merch': [float(self.cleaned_data['distance_to_merch'])],
+        }
+
+        # Create the DataFrame with the correct data types
+        df = pd.DataFrame(data)
+
+        return df
+
