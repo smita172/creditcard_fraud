@@ -22,6 +22,16 @@
             {{ form.as_p }}
             <button type="submit" class="btn-submit">Predict Fraud</button>
         </form>
+
+    {% if prediction_result is not None %}
+        <h2>Prediction Result:
+            {% if prediction_result == 0 %}
+                No Fraud
+            {% else %}
+                Fraud
+            {% endif %}
+        </h2>
+    {% endif %}
     </div>
 
 </body>

@@ -31,10 +31,13 @@
         <h2>Overview</h2>
         <p>This system leverages predictive modeling and data analysis techniques to identify potential fraudulent transactions. With easy navigation options, users can manually input transactions, upload bulk data via CSV, or visualize fraud detection insights.</p>
         <div class="features">
-            <div class="feature">
-                <h3>Real-Time Prediction</h3>
-                <p>Enter transaction details to instantly predict if the transaction is fraudulent, allowing quick decision-making.</p>
-            </div>
+            <a href="{% url 'input_prediction' %}">
+    <div class="feature">
+        <h3>Input Prediction</h3>
+        <p>Enter transaction details to instantly predict if the transaction is fraudulent, allowing quick decision-making.</p>
+    </div>
+            </a>
+
             <div class="feature">
                 <h3>CSV file Analysis</h3>
                 <p>Upload a CSV file of transactions to analyze large volumes of data for fraudulent activity detection.</p>

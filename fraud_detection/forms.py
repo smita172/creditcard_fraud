@@ -24,7 +24,7 @@ class PredictionForm(forms.Form):
     )
     age = forms.DecimalField(
         label='Age',
-        max_digits=5,
+        max_digits=10,
         decimal_places=6,
         help_text="Enter the age of the person (e.g., 25.50)."
     )

@@ -16,7 +16,9 @@ def input_prediction(request):
             input_df = form.to_dataframe()
 
             # Predict using the loaded model
+            print(input_df)
             prediction = model.predict(input_df)
+            print(prediction)
             prediction_result = prediction[0]  # Get single prediction
 
     else:
