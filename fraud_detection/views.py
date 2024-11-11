@@ -4,7 +4,10 @@ from .forms import PredictionForm
 from .utils import model
 # from .utils import  predictions_df
 
-def predict(request):
+def home_view(request):
+    return render(request, 'home.html')
+
+def input_prediction(request):
     prediction_result = None
     if request.method == 'POST':
         form = PredictionForm(request.POST)
@@ -19,7 +22,7 @@ def predict(request):
     else:
         form = PredictionForm()
 
-    return render(request, 'predict.html', {
+    return render(request, 'input_prediction.html', {
         'form': form,
         'prediction_result': prediction_result,
     })

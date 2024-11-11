@@ -1,0 +1,104 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Form Header */
+.form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-header h1 {
+    font-size: 2rem;
+    color: #222;
+}
+
+.form-header p {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 0.5rem;
+}
+
+/* Form Container */
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+form p {
+    margin-bottom: 1.5rem;
+}
+
+form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* Radio Buttons */
+form .radio-select {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+form .radio-select label {
+    font-weight: normal;
+    margin-left: 0.5rem;
+}
+
+/* Submit Button */
+.btn-submit {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}

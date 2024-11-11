@@ -1,4 +1,3 @@
-from django import forms
 import pandas as pd
 from django import forms
 
@@ -10,7 +9,7 @@ class PredictionForm(forms.Form):
     amt = forms.DecimalField(
         label='Transaction Amount',
         max_digits=10,
-        decimal_places=2,  # Adjusted to two decimal places for practicality
+        decimal_places=6,
         help_text="Enter the transaction amount (e.g., 100.00)."
     )
     gender = forms.ChoiceField(
@@ -26,7 +25,7 @@ class PredictionForm(forms.Form):
     age = forms.DecimalField(
         label='Age',
         max_digits=5,
-        decimal_places=2,
+        decimal_places=6,
         help_text="Enter the age of the person (e.g., 25.50)."
     )
     trans_year = forms.IntegerField(
@@ -44,7 +43,7 @@ class PredictionForm(forms.Form):
     distance_to_merch = forms.DecimalField(
         label='Distance to Merchant (km)',
         max_digits=10,
-        decimal_places=2,  # Adjusted to two decimal places for practicality
+        decimal_places=6,
         help_text="Enter the distance in kilometers (e.g., 15.50)."
     )
 

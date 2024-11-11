@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Prediction - Fraud Detection</title>
+    <link rel="stylesheet" href="{% static 'css/input_prediction.css' %}">
+</head>
+<body>
+
+    <!-- Form Header -->
+    <div class="form-header">
+        <h1>Input Prediction</h1>
+        <p>Enter transaction details to predict the likelihood of fraud.</p>
+    </div>
+
+    <!-- Prediction Form -->
+    <div class="form-container">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-submit">Predict Fraud</button>
+        </form>
+    </div>
+
+</body>
+</html>

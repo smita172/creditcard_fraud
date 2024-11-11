@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Fraud Detection System</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#" class="navbar-logo">Fraud Detection</a>
+        <div class="navbar-menu">
+            <a href="{% url 'input_prediction' %}">Input Prediction</a>
+{#            <a href="{% url 'csv_upload' %}">CSV Upload</a>#}
+{#            <a href="{% url 'visualization' %}">Visualization</a>#}
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>Credit Card Fraud Detection System</h1>
+        <p>Your trusted solution for detecting fraudulent transactions, leveraging data insights to enhance security and protect users.</p>
+        <p>With cutting-edge predictive models and comprehensive analytics, our system helps you identify potential fraud in real-time.</p>
+    </div>
+
+    <!-- Overview Section -->
+    <div class="overview-section">
+        <h2>Overview</h2>
+        <p>This system leverages predictive modeling and data analysis techniques to identify potential fraudulent transactions. With easy navigation options, users can manually input transactions, upload bulk data via CSV, or visualize fraud detection insights.</p>
+        <div class="features">
+            <div class="feature">
+                <h3>Real-Time Prediction</h3>
+                <p>Enter transaction details to instantly predict if the transaction is fraudulent, allowing quick decision-making.</p>
+            </div>
+            <div class="feature">
+                <h3>CSV file Analysis</h3>
+                <p>Upload a CSV file of transactions to analyze large volumes of data for fraudulent activity detection.</p>
+            </div>
+            <div class="feature">
+                <h3>Detailed Visualization</h3>
+                <p>Get comprehensive insights into the fraud detection process through intuitive visualizations.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
