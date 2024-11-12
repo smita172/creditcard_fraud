@@ -1,0 +1,106 @@
+/* Base styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container styling */
+.result-container {
+    text-align: center;
+}
+
+.result-container h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Result card */
+.result-card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Result message */
+.result-message {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.result-message.fraud {
+    color: #d9534f; /* Red for fraud */
+}
+
+.result-message.no-fraud {
+    color: #5cb85c; /* Green for no fraud */
+}
+
+/* Transaction details section */
+.transaction-details {
+    background-color: #f9f9f9;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.transaction-details p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+.transaction-details strong {
+    color: #333;
+}
+
+/* Button styling */
+.button-group {
+    display: flex;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.btn {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.new-prediction {
+    background-color: #007bff;
+}
+
+.new-prediction:hover {
+    background-color: #0056b3;
+}
+
+.home {
+    background-color: #5a6268;
+}
+
+.home:hover {
+    background-color: #444950;
+}

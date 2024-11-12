@@ -4,29 +4,28 @@ from django import forms
 class PredictionForm(forms.Form):
     category = forms.IntegerField(
         label='Transaction Category',
-        help_text="Enter the category of the transaction (e.g., groceries, electronics)."
     )
     amt = forms.DecimalField(
         label='Transaction Amount',
         max_digits=10,
         decimal_places=6,
-        help_text="Enter the transaction amount (e.g., 100.00)."
+        # help_text="Enter the transaction amount."
     )
     gender = forms.ChoiceField(
         label='Gender',
         choices=[(1, 'Male'), (0, 'Female')],
         widget=forms.RadioSelect,
-        help_text="Select the gender."
+        # help_text="Select the gender."
     )
     city_pop = forms.IntegerField(
         label='City Population',
-        help_text="Enter the population of the city where the transaction took place."
+        # help_text="Enter the population of the city where the transaction took place."
     )
     age = forms.DecimalField(
         label='Age',
         max_digits=10,
         decimal_places=6,
-        help_text="Enter the age of the person (e.g., 25.50)."
+        # help_text="Enter the age of the person."
     )
     trans_year = forms.IntegerField(
         label='Transaction Year'
@@ -44,7 +43,7 @@ class PredictionForm(forms.Form):
         label='Distance to Merchant (km)',
         max_digits=10,
         decimal_places=6,
-        help_text="Enter the distance in kilometers (e.g., 15.50)."
+        # help_text="Enter the distance in kilometers."
     )
 
 

@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result - Fraud Detection</title>
+    <link rel="stylesheet" href="{% static 'css/input_result.css' %}">
+</head>
+<body>
+    <div class="result-container">
+        <h2>Prediction Result</h2>
+        <div class="result-card">
+            {% if prediction_result == "Fraud" %}
+                <p class="result-message fraud">The transaction is likely <strong>fraudulent</strong>.</p>
+            {% else %}
+                <p class="result-message no-fraud">The transaction is <strong>not fraudulent</strong>.</p>
+            {% endif %}
+
+            <h3>Transaction Details</h3>
+            <div class="transaction-details">
+                <p><strong>Category:</strong> {{ transaction_data.category }}</p>
+                <p><strong>Amount:</strong> {{ transaction_data.amt }}</p>
+                <p><strong>Gender:</strong> {% if transaction_data.gender == '1' %} Male {% else %} Female {% endif %}</p>
+                <p><strong>City Population:</strong> {{ transaction_data.city_pop }}</p>
+                <p><strong>Age:</strong> {{ transaction_data.age }}</p>
+                <p><strong>Transaction Date:</strong> {{ transaction_data.trans_day }}/{{ transaction_data.trans_month }}/{{ transaction_data.trans_year }}</p>
+                <p><strong>Transaction Hour:</strong> {{ transaction_data.trans_hour }}</p>
+                <p><strong>Distance to Merchant:</strong> {{ transaction_data.distance_to_merch }} km</p>
+            </div>
+
+            <div class="button-group">
+                <a href="{% url 'input_prediction' %}" class="btn new-prediction">New Prediction</a>
+                <a href="{% url 'home' %}" class="btn home">Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

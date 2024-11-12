@@ -14,8 +14,8 @@
         <a href="#" class="navbar-logo">Fraud Detection</a>
         <div class="navbar-menu">
             <a href="{% url 'input_prediction' %}">Input Prediction</a>
-{#            <a href="{% url 'csv_upload' %}">CSV Upload</a>#}
-{#            <a href="{% url 'visualization' %}">Visualization</a>#}
+            <a>CSV Upload</a>
+            <a>Visualization</a>
         </div>
     </div>
 
@@ -23,27 +23,29 @@
     <div class="hero-section">
         <h1>Credit Card Fraud Detection System</h1>
         <p>Your trusted solution for detecting fraudulent transactions, leveraging data insights to enhance security and protect users.</p>
-        <p>With cutting-edge predictive models and comprehensive analytics, our system helps you identify potential fraud in real-time.</p>
     </div>
 
     <!-- Overview Section -->
     <div class="overview-section">
         <h2>Overview</h2>
         <p>This system leverages predictive modeling and data analysis techniques to identify potential fraudulent transactions. With easy navigation options, users can manually input transactions, upload bulk data via CSV, or visualize fraud detection insights.</p>
+        
         <div class="features">
-            <a href="{% url 'input_prediction' %}">
-    <div class="feature">
-        <h3>Input Prediction</h3>
-        <p>Enter transaction details to instantly predict if the transaction is fraudulent, allowing quick decision-making.</p>
-    </div>
-            </a>
-
+            <!-- Feature Card 1 -->
             <div class="feature">
-                <h3>CSV file Analysis</h3>
+                <h3><a style="text-decoration: none; color: #007bff;">Input Prediction</a></h3>
+                <p>Enter transaction details to instantly predict if the transaction is fraudulent, allowing quick decision-making.</p>
+            </div>
+
+            <!-- Feature Card 2 -->
+            <div class="feature">
+                <h3><a style="text-decoration: none; color: #007bff;">CSV File Analysis</a></h3>
                 <p>Upload a CSV file of transactions to analyze large volumes of data for fraudulent activity detection.</p>
             </div>
+
+            <!-- Feature Card 3 -->
             <div class="feature">
-                <h3>Detailed Visualization</h3>
+                <h3><a style="text-decoration: none; color: #007bff;">Detailed Visualization</a></h3>
                 <p>Get comprehensive insights into the fraud detection process through intuitive visualizations.</p>
             </div>
         </div>
