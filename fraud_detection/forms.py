@@ -67,3 +67,9 @@ class PredictionForm(forms.Form):
 
         return df
 
+class CSVUploadForm(forms.Form):
+    file = forms.FileField(
+        label='Upload CSV',
+        help_text='Upload a CSV file with the required columns.'
+    )
+
