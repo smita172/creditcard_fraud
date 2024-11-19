@@ -1,106 +1,80 @@
-/* Base styling */
-* {
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    line-height: 1.6;
 }
 
-body {
-    background-color: #f4f4f9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-}
-
-/* Container styling */
+/* Result container */
 .result-container {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 .result-container h2 {
-    font-size: 2rem;
+    margin: 0 0 20px;
     color: #333;
-    margin-bottom: 1.5rem;
 }
 
 /* Result card */
 .result-card {
-    background-color: #ffffff;
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 600px;
-    margin: 0 auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
-/* Result message */
+/* Fraud messages */
 .result-message {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .result-message.fraud {
-    color: #d9534f; /* Red for fraud */
+    color: white;
+    background-color: #dc3545;
 }
 
 .result-message.no-fraud {
-    color: #5cb85c; /* Green for no fraud */
+    color: white;
+    background-color: #28a745;
 }
 
-/* Transaction details section */
+/* Transaction details */
 .transaction-details {
-    background-color: #f9f9f9;
-    padding: 1rem;
-    border-radius: 10px;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
     text-align: left;
+    margin-top: 20px;
 }
 
 .transaction-details p {
-    margin: 0.5rem 0;
-    font-size: 1rem;
-    color: #555;
+    margin: 8px 0;
 }
 
-.transaction-details strong {
-    color: #333;
-}
-
-/* Button styling */
+/* Buttons */
 .button-group {
-    display: flex;
-    justify-content: space-around;
-    gap: 1rem;
+    margin-top: 20px;
 }
 
-.btn {
+.button-group .btn {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
     text-decoration: none;
-    color: #ffffff;
-    padding: 0.6rem 1.5rem;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.new-prediction {
+    color: white;
+    border-radius: 5px;
     background-color: #007bff;
+    transition: background-color 0.3s ease;
 }
 
-.new-prediction:hover {
+.button-group .btn:hover {
     background-color: #0056b3;
-}
-
-.home {
-    background-color: #5a6268;
-}
-
-.home:hover {
-    background-color: #444950;
 }

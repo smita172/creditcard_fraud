@@ -7,33 +7,23 @@ body {
     line-height: 1.6;
 }
 
-/* Form header */
-.form-header {
-    text-align: center;
-    padding: 20px;
-    background-color: #007bff;
-    color: white;
-}
-
-.form-header h1 {
-    margin: 0;
-    font-size: 28px;
-}
-
-.form-header p {
-    margin: 10px 0 0;
-}
-
-/* Form container */
-.form-container {
+/* Container styling */
+form {
     max-width: 500px;
-    margin: 20px auto;
+    margin: 40px auto;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Form elements */
 form label {
     font-weight: bold;
     display: block;
@@ -50,7 +40,7 @@ form select, form input, form button {
 }
 
 /* Submit button */
-.btn-submit {
+form button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -58,6 +48,23 @@ form select, form input, form button {
     transition: background-color 0.3s ease;
 }
 
-.btn-submit:hover {
+form button:hover {
     background-color: #0056b3;
+}
+
+/* Messages */
+.messages p {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.messages p.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.messages p.success {
+    background-color: #d4edda;
+    color: #155724;
 }

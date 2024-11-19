@@ -1,15 +1,22 @@
-<!-- csv_app/templates/csv_app/csv_prediction.html -->
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>CSV Prediction Upload</title>
+    <link rel="stylesheet" href="{% static 'css/csv_prediction.css' %}">
 </head>
 <body>
     <h1>Upload CSV File for Prediction</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+        <label for="categories">Categories:</label>
+        <select id="categories">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.id }} - {{ category.description }}</option>
+            {% endfor %}
+        </select>
         <button type="submit">Upload and Process</button>
     </form>
     {% if messages %}
