@@ -1,63 +1,80 @@
-/* General styling */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
-    line-height: 1.6;
-}
+/*!* General styling *!*/
+/*body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    background-color: #f8f9fa;*/
+/*    line-height: 1.6;*/
+/*}*/
 
-/* Form header */
-.form-header {
-    text-align: center;
-    padding: 20px;
-    background-color: #007bff;
-    color: white;
-}
+/*!* Form header *!*/
+/*.form-header {*/
+/*    text-align: center;*/
+/*    padding: 20px;*/
+/*    background-color: #007bff;*/
+/*    color: white;*/
+/*}*/
 
-.form-header h1 {
-    margin: 0;
-    font-size: 28px;
-}
+/*.form-header h1 {*/
+/*    margin: 0;*/
+/*    font-size: 28px;*/
+/*}*/
 
-.form-header p {
-    margin: 10px 0 0;
-}
+/*.form-header p {*/
+/*    margin: 10px 0 0;*/
+/*}*/
 
-/* Form container */
-.form-container {
-    max-width: 500px;
-    margin: 20px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+/*!* Form container *!*/
+/*.form-container {*/
+/*    max-width: 600px;*/
+/*    margin: 40px auto;*/
+/*    background-color: white;*/
+/*    padding: 30px;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
 
-form label {
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
+/*.form-group {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 15px;*/
+/*}*/
 
-form select, form input, form button {
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-}
+/*form label {*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 5px;*/
+/*}*/
 
-/* Submit button */
-.btn-submit {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+/*!* Input fields and buttons *!*/
+/*form input,*/
+/*form select,*/
+/*form textarea {*/
+/*    width: calc(100% - 20px);*/
+/*    padding: 10px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 5px;*/
+/*    font-size: 16px;*/
+/*    box-sizing: border-box;*/
+/*}*/
 
-.btn-submit:hover {
-    background-color: #0056b3;
-}
+/*!* Radio buttons alignment *!*/
+/*form input[type="radio"] {*/
+/*    margin-right: 5px;*/
+/*}*/
+
+/*!* Submit button *!*/
+/*.btn-submit {*/
+/*    background-color: #007bff;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    cursor: pointer;*/
+/*    padding: 10px;*/
+/*    border-radius: 5px;*/
+/*    font-size: 16px;*/
+/*    transition: background-color 0.3s ease;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.btn-submit:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/

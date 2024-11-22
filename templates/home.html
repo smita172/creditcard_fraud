@@ -15,6 +15,7 @@
         <div class="navbar-menu">
             <a href="{% url 'input_prediction' %}">Input Prediction</a>
             <a href="{% url 'csv_prediction' %}">CSV Upload</a>
+            <a href="{% url 'csv_visualization' %}">File Visualization</a>
         </div>
     </div>
 
@@ -27,9 +28,9 @@
 
    <div class="overview-section">
     <h2>Overview</h2>
-    <br>
+    <p>
         This system leverages predictive modeling and data analysis techniques
-        to identify potential fraudulent transactions. With easy navigation </br>
+        to identify potential fraudulent transactions. With easy navigation
         options, users can manually input transactions, upload bulk data via
         CSV, or visualize fraud detection insights.
     </p>
@@ -57,7 +58,7 @@
         <!-- Detailed Visualization -->
         <div class="feature">
             <img src="{% static 'images/visualization.jpg' %}" alt="Detailed Visualization">
-            <h3><a href="{% url 'csv_visualization' %}">CSV File Analysis</a></h3>
+            <h3><a href="{% url 'csv_visualization' %}">File Visualization</a></h3>
             <p>
                 Get comprehensive insights into the fraud detection process
                 through intuitive visualizations.

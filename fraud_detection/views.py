@@ -120,7 +120,6 @@ def input_prediction(request):
     # Render the input form page
     return render(request, 'input_prediction.html', {
         'form': form,
-        'categories': CATEGORIES,
     })
 
 

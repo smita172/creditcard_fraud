@@ -5,24 +5,199 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Input Prediction - Fraud Detection</title>
-    <link rel="stylesheet" href="{% static 'css/input_prediction.css' %}">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f8fb; /* Light blue-gray background */
+            margin: 0;
+            padding: 0;
+            color: #333; /* Dark gray text for contrast */
+        }
+        .form-container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-header h1 {
+            font-size: 1.8em;
+            color: #0066cc; /* Strong blue for heading */
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .form-header p {
+            text-align: center;
+            font-size: 1em;
+            color: #5a5a5a; /* Neutral gray for subtext */
+            margin-bottom: 20px;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .form-group .radio-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .form-group .radio-group input {
+            margin-right: 5px;
+        }
+        .form-group .radio-group label {
+            margin-right: 15px;
+        }
+        .form-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .form-actions button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-actions button:hover {
+            background-color: #0056b3;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffffff; /* White text */
+            background-color: #007bff; /* Primary blue button */
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: scale(1.02); /* Slight scaling effect */
+        }
+
+        .btn-submit:active {
+            background-color: #004080; /* Even darker blue when clicked */
+            transform: scale(0.98); /* Slight shrink on click */
+        }
+
+        @media (max-width: 768px) {  
+            .form-container {
+                width: 90%; /* Adjust form width for smaller screens */
+        }
+
+        .form-header h1 {
+            font-size: 1.5em;
+        }
+
+    </style>
+{#    <link rel="stylesheet" href="{% static 'css/input_prediction.css' %}">#}
 </head>
 <body>
-    <div class="form-header">
-        <h1>Input Prediction</h1>
-        <p>Enter transaction details to predict the likelihood of fraud.</p>
-    </div>
-
     <div class="form-container">
+        <div class="form-header">
+            <h1>Input Prediction</h1>
+            <p>Enter transaction details to predict the likelihood of fraud.</p>
+        </div>
         <form method="post">
             {% csrf_token %}
-            <label for="category">Category:</label>
-            <select id="category" name="category">
-                {% for category in categories %}
-                    <option value="{{ category.id }}">{{ category.id }} - {{ category.description }}</option>
-                {% endfor %}
-            </select>
-            {{ form.as_p }}
+{#            <div class="form-group">#}
+{#                {{ form.as_p }}#}
+{#            </div>#}
+
+            <!-- Category Field -->
+            <div class="form-group">
+                <label for="id_category">Transaction Category</label>
+                {{ form.category }}
+            </div>
+
+            <!-- Amount Field -->
+            <div class="form-group">
+                <label for="id_amt">Transaction Amount</label>
+                {{ form.amt }}
+            </div>
+
+            <!-- Gender Field -->
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="radio-group">
+                    {% for choice in form.gender %}
+                        {{ choice.tag }} <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- City Population Field -->
+            <div class="form-group">
+                <label for="id_city_pop">City Population</label>
+                {{ form.city_pop }}
+            </div>
+
+            <!-- Age Field -->
+            <div class="form-group">
+                <label for="id_age">Age</label>
+                {{ form.age }}
+            </div>
+
+            <!-- Transaction Year Field -->
+            <div class="form-group">
+                <label for="id_trans_year">Transaction Year</label>
+                {{ form.trans_year }}
+            </div>
+
+            <!-- Transaction Month Field -->
+            <div class="form-group">
+                <label for="id_trans_month">Transaction Month</label>
+                {{ form.trans_month }}
+            </div>
+
+            <!-- Transaction Day Field -->
+            <div class="form-group">
+                <label for="id_trans_day">Transaction Day</label>
+                {{ form.trans_day }}
+            </div>
+
+            <!-- Transaction Hour Field -->
+            <div class="form-group">
+                <label for="id_trans_hour">Transaction Hour</label>
+                {{ form.trans_hour }}
+            </div>
+
+            <!-- Distance to Merchant Field -->
+            <div class="form-group">
+                <label for="id_distance_to_merch">Distance to Merchant (km)</label>
+                {{ form.distance_to_merch }}
+            </div>
             <button type="submit" class="btn-submit">Predict Fraud</button>
         </form>
     </div>

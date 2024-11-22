@@ -2,8 +2,24 @@ import pandas as pd
 from django import forms
 
 class PredictionForm(forms.Form):
-    category = forms.IntegerField(
+    category = forms.ChoiceField(
         label='Transaction Category',
+        choices=[
+            ('0','entertainment'),
+            ('1','food_dining'),
+            ('2','gas_transport'),
+            ('3','grocery_net'),
+            ('4','grocery_pos'),
+            ('5','health_fitness'),
+            ('6','home'),
+            ('7','kids_pets'),
+            ('8','misc_net'),
+            ('9','misc_pos'),
+            ('10','personal_care'),
+            ('11','shopping_net'),
+            ('12','shopping_pos'),
+            ('13','travel'),
+        ]
     )
     amt = forms.DecimalField(
         label='Transaction Amount',
@@ -14,7 +30,7 @@ class PredictionForm(forms.Form):
     gender = forms.ChoiceField(
         label='Gender',
         choices=[(1, 'Male'), (0, 'Female')],
-        widget=forms.RadioSelect,
+        widget=forms.RadioSelect(attrs={'class': 'radio-group'}),
         # help_text="Select the gender."
     )
     city_pop = forms.IntegerField(
