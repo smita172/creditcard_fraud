@@ -4,9 +4,151 @@
 <head>
     <meta charset="UTF-8">
     <title>CSV Prediction Upload</title>
-    <link rel="stylesheet" href="{% static 'css/csv_prediction.css' %}">
+{#    <link rel="stylesheet" href="{% static 'css/csv_prediction.css' %}">#}
+    <style>
+        /* General styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    line-height: 1.6;
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #222;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00bcd4;
+    text-decoration: none;
+}
+
+.navbar-menu a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.navbar-menu a:hover {
+    color: #00bcd4;
+}
+
+/* Main Content Styling */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+    font-size: 28px;
+}
+
+/* Form styling */
+form {
+    max-width: 600px;
+    margin: 30px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+form select, form input, form button {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Submit button */
+form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Table Styling */
+.category-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.category-table th,
+.category-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.category-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.category-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.category-table tbody tr:hover {
+    background-color: #e6f7ff;
+}
+
+/* Messages Styling */
+.messages p {
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.messages p.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.messages p.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+    </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#" class="navbar-logo">Fraud Detection</a>
+        <div class="navbar-menu">
+            <a href="{% url 'input_prediction' %}">Input Prediction</a>
+            <a href="{% url 'csv_prediction' %}">CSV Upload</a>
+            <a href="{% url 'csv_visualization' %}">File Visualization</a>
+        </div>
+    </div>
     <h1>Upload CSV File for Prediction</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}

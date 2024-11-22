@@ -13,6 +13,35 @@
             padding: 0;
             color: #333; /* Dark gray text for contrast */
         }
+        /* Navbar styling */
+        .navbar {
+            background-color: #222;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00bcd4;
+            text-decoration: none;
+        }
+
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .navbar-menu a:hover {
+            color: #00bcd4;
+        }
         .form-container {
             width: 60%;
             margin: 50px auto;
@@ -124,6 +153,16 @@
 {#    <link rel="stylesheet" href="{% static 'css/input_prediction.css' %}">#}
 </head>
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <a href="#" class="navbar-logo">Fraud Detection</a>
+        <div class="navbar-menu">
+            <a href="{% url 'input_prediction' %}">Input Prediction</a>
+            <a href="{% url 'csv_prediction' %}">CSV Upload</a>
+            <a href="{% url 'csv_visualization' %}">File Visualization</a>
+        </div>
+    </div>
+    
     <div class="form-container">
         <div class="form-header">
             <h1>Input Prediction</h1>
