@@ -11,12 +11,24 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <label for="categories">Categories:</label>
-        <select id="categories">
-            {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.id }} - {{ category.description }}</option>
-            {% endfor %}
-        </select>
+          <h2>Category Mappings</h2>
+        <table class="category-table">
+            <thead>
+                <tr>
+                    <th>Encoded Value    </th>
+                    <th>Category Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>{{ category.id }}</td>
+                        <td>{{ category.description }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
         <button type="submit">Upload and Process</button>
     </form>
     {% if messages %}

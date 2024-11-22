@@ -27,16 +27,16 @@
 
    <div class="overview-section">
     <h2>Overview</h2>
-    <p>
+    <br>
         This system leverages predictive modeling and data analysis techniques
-        to identify potential fraudulent transactions. With easy navigation
+        to identify potential fraudulent transactions. With easy navigation </br>
         options, users can manually input transactions, upload bulk data via
         CSV, or visualize fraud detection insights.
     </p>
     <div class="features">
         <!-- Input Prediction -->
         <div class="feature">
-            <img src="{% static 'images/input.jpg' %}" alt="Input Prediction">
+{#            <img src="{% static 'images/input.jpg' %}" alt="Input Prediction">#}
             <h3><a href="{% url 'input_prediction' %}">Input Prediction</a></h3>
             <p>
                 Enter transaction details to instantly predict if the
@@ -46,7 +46,7 @@
 
         <!-- CSV File Analysis -->
         <div class="feature">
-            <img src="{% static 'images/csv.jpg' %}" alt="CSV File Analysis">
+{#            <img src="{% static 'images/csv.jpg' %}" alt="CSV File Analysis">#}
             <h3><a href="{% url 'csv_prediction' %}">CSV File Analysis</a></h3>
             <p>
                 Upload a CSV file of transactions to analyze large volumes of
@@ -56,8 +56,8 @@
 
         <!-- Detailed Visualization -->
         <div class="feature">
-            <img src="{% static 'images/visualization.jpg' %}" alt="Detailed Visualization">
-            <h3>Detailed Visualization</h3>
+{#            <img src="{% static 'images/visualization.jpg' %}" alt="Detailed Visualization">#}
+            <h3><a href="{% url 'csv_visualization' %}">CSV File Analysis</a></h3>
             <p>
                 Get comprehensive insights into the fraud detection process
                 through intuitive visualizations.

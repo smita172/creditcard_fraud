@@ -8,8 +8,11 @@ from .forms import CSVUploadForm
 from .models import ProcessedData
 from django.http import HttpResponse
 import pickle
-# from .utils import  predictions_df
+from django.conf import settings
 import pandas as pd
+import os
+import matplotlib.pyplot as plt
+import joblib
 
 REQUIRED_COLUMNS = [
     'category', 'amt', 'gender', 'city_pop', 'age',
@@ -17,11 +20,20 @@ REQUIRED_COLUMNS = [
 ]
 
 CATEGORIES = [
-    {'id': 1, 'description': 'Food'},
-    {'id': 2, 'description': 'Travel'},
-    {'id': 3, 'description': 'Electronics'},
-    {'id': 4, 'description': 'Clothing'},
-    {'id': 5, 'description': 'Others'},
+    {'id': 0, 'description': 'entertainment'},
+    {'id': 1, 'description': 'food_dining'},
+    {'id': 2, 'description': 'gas_transport'},
+    {'id': 3, 'description': 'grocery_net'},
+    {'id': 4, 'description': 'grocery_pos'},
+    {'id': 5, 'description': 'health_fitness'},
+    {'id': 6, 'description': 'home'},
+    {'id': 7, 'description': 'kids_pets'},
+    {'id': 8, 'description': 'misc_net'},
+    {'id': 9, 'description': 'misc_pos'},
+    {'id': 10, 'description': 'personal_care'},
+    {'id': 11, 'description': 'shopping_net'},
+    {'id': 12, 'description': 'shopping_pos'},
+    {'id': 13, 'description': 'travel'},
 ]
 
 def safe_convert(value, target_type):
@@ -90,7 +102,7 @@ def input_prediction(request):
                 })
 
             try:
-                with open('models/xgb_smote_tomek_model.pkl', 'rb') as model_file:
+                with open('model.pkl', 'rb') as model_file:
                     model = pickle.load(model_file)
                 prediction = model.predict(input_df)
                 prediction_result = "Fraudulent" if prediction[0] == 1 else "Not Fraudulent"
@@ -134,8 +146,10 @@ def upload_csv(request):
             header = reader.fieldnames + ['prediction']
             writer.writerow(header)
 
-            with open(r'C:/credit card/creditcard_fraud/model2.pkl', 'rb') as model_file2:
-                model2 = pickle.load(model_file2)
+
+
+
+            model2 = joblib.load(r'model.pkl')
 
             for row in reader:
                 features = pd.DataFrame([{
@@ -145,7 +159,7 @@ def upload_csv(request):
                     for col in REQUIRED_COLUMNS
                 }])
                 fraud_status = "Invalid Data" if features.isnull().values.any() else (
-                    "Fraudulent" if model.predict(features)[0] == 1 else "Not Fraudulent"
+                    "Fraudulent" if model2.predict(features)[0] == 1 else "Not Fraudulent"
                 )
                 row['Fraud Prediction (Fraudulent or Not Fraudulent)'] = fraud_status
                 writer.writerow(row.values())
@@ -162,3 +176,100 @@ def upload_csv(request):
         'form': form,
         'categories': CATEGORIES,
     })
+
+
+def csv_visualization(request):
+
+    csv_file_path = os.path.join(settings.BASE_DIR, 'processed_results_with_predictions.csv')
+    data = pd.read_csv(csv_file_path)
+
+    print(data['prediction'].value_counts())
+    # 1. Fraud vs Not Fraud
+    fraud_counts = data['prediction'].value_counts()
+    fraud_plot_path = os.path.join(settings.MEDIA_ROOT, 'fraud_vs_not_fraud.png')
+    plt.figure(figsize=(6, 4))
+    fraud_counts.plot(kind='bar', color=['green', 'red'])
+    plt.title('Fraud vs Not Fraud')
+    plt.xlabel('Prediction')
+    plt.ylabel('Count')
+    plt.xticks(rotation=0)
+    plt.savefig(fraud_plot_path)
+    plt.close()
+
+    # 2. Transaction Amount Distribution
+    amt_dist_plot_path = os.path.join(settings.MEDIA_ROOT, 'amt_distribution.png')
+    plt.figure(figsize=(6, 4))
+    data['amt'].plot(kind='hist', bins=20, color='skyblue', edgecolor='black')
+    plt.title('Transaction Amount Distribution')
+    plt.xlabel('Transaction Amount')
+    plt.ylabel('Frequency')
+    plt.savefig(amt_dist_plot_path)
+    plt.close()
+
+    # 3. Gender-wise Fraud Analysis
+    gender_fraud_counts = data.groupby('gender')['prediction'].value_counts().unstack()
+    gender_fraud_plot_path = os.path.join(settings.MEDIA_ROOT, 'gender_fraud.png')
+    gender_fraud_counts.plot(kind='bar', figsize=(6, 4), stacked=True, color=['green', 'red'])
+    plt.title('Gender-wise Fraud Analysis')
+    plt.xlabel('Gender (0: Female, 1: Male)')
+    plt.ylabel('Count')
+    plt.xticks(rotation=0)
+    plt.savefig(gender_fraud_plot_path)
+    plt.close()
+
+    # 4. Transaction Volume by Month
+    trans_month_counts = data['trans_month'].value_counts().sort_index()
+    month_plot_path = os.path.join(settings.MEDIA_ROOT, 'trans_by_month.png')
+    plt.figure(figsize=(6, 4))
+    trans_month_counts.plot(kind='bar', color='purple')
+    plt.title('Transaction Volume by Month')
+    plt.xlabel('Month')
+    plt.ylabel('Number of Transactions')
+    plt.savefig(month_plot_path)
+    plt.close()
+
+    # Number of Fraud Transactions by Category
+    fraud_transactions = data[data['prediction'] == 'fraud']  # Filter for fraud transactions
+    fraud_counts_by_category = fraud_transactions['category'].value_counts()
+
+    # Save the fraud count plot for categories
+    category_fraud_plot_path = os.path.join(settings.MEDIA_ROOT, 'fraud_transactions_by_category.png')
+    plt.figure(figsize=(6, 4))
+    fraud_counts_by_category.plot(kind='bar', color='orange')
+    plt.title('Number of Fraud Transactions by Category')
+    plt.xlabel('Category')
+    plt.ylabel('Number of Fraud Transactions')
+    plt.savefig(category_fraud_plot_path)
+    plt.close()
+
+    # 6. Distance to Merchant Distribution
+    dist_plot_path = os.path.join(settings.MEDIA_ROOT, 'distance_distribution.png')
+    plt.figure(figsize=(6, 4))
+    data['distance_to_merch'].plot(kind='hist', bins=20, color='cyan', edgecolor='black')
+    plt.title('Distance to Merchant Distribution')
+    plt.xlabel('Distance')
+    plt.ylabel('Frequency')
+    plt.savefig(dist_plot_path)
+    plt.close()
+
+    # 7. Age Distribution
+    age_plot_path = os.path.join(settings.MEDIA_ROOT, 'age_distribution.png')
+    plt.figure(figsize=(6, 4))
+    data['age'].plot(kind='hist', bins=20, color='pink', edgecolor='black')
+    plt.title('Age Distribution')
+    plt.xlabel('Age')
+    plt.ylabel('Frequency')
+    plt.savefig(age_plot_path)
+    plt.close()
+
+    # Prepare context for rendering
+    context = {
+        'fraud_plot_url': settings.MEDIA_URL + 'fraud_vs_not_fraud.png',
+        'amt_dist_plot_url': settings.MEDIA_URL + 'amt_distribution.png',
+        'gender_fraud_plot_url': settings.MEDIA_URL + 'gender_fraud.png',
+        'month_plot_url': settings.MEDIA_URL + 'trans_by_month.png',
+        'category_fraud_plot_url': settings.MEDIA_URL + 'fraud_transactions_by_category.png',
+        'dist_plot_url': settings.MEDIA_URL + 'distance_distribution.png',
+        'age_plot_url': settings.MEDIA_URL + 'age_distribution.png',
+    }
+    return render(request, 'csv_visualization.html', context)
