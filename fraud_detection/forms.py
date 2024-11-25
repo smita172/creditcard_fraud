@@ -2,6 +2,12 @@ import pandas as pd
 from django import forms
 
 class PredictionForm(forms.Form):
+    amt = forms.DecimalField(
+        label='Transaction Amount',
+        max_digits=10,
+        decimal_places=6,
+        # help_text="Enter the transaction amount."
+    )
     category = forms.ChoiceField(
         label='Transaction Category',
         choices=[
@@ -21,27 +27,38 @@ class PredictionForm(forms.Form):
             ('13','travel'),
         ]
     )
-    amt = forms.DecimalField(
-        label='Transaction Amount',
+    lat = forms.DecimalField(
+        label='Customer Latitude',
         max_digits=10,
         decimal_places=6,
-        # help_text="Enter the transaction amount."
     )
-    gender = forms.ChoiceField(
-        label='Gender',
-        choices=[(1, 'Male'), (0, 'Female')],
-        widget=forms.RadioSelect(attrs={'class': 'radio-group'}),
-        # help_text="Select the gender."
+    long = forms.DecimalField(
+        label='Customer Longitude',
+        max_digits=10,
+        decimal_places=6,
     )
+    merch_lat = forms.DecimalField(
+        label='Merchant Latitude',
+        max_digits=10,
+        decimal_places=6,
+    )
+    merch_long = forms.DecimalField(
+        label='Merchant Longitude',
+        max_digits=10,
+        decimal_places=6,
+    )
+    # gender = forms.ChoiceField(
+    #     label='Gender',
+    #     choices=[(1, 'Male'), (0, 'Female')],
+    #     widget=forms.RadioSelect(attrs={'class': 'radio-group'}),
+    #     # help_text="Select the gender."
+    # )
     city_pop = forms.IntegerField(
         label='City Population',
         # help_text="Enter the population of the city where the transaction took place."
     )
-    age = forms.DecimalField(
+    age = forms.IntegerField(
         label='Age',
-        max_digits=10,
-        decimal_places=6,
-        # help_text="Enter the age of the person."
     )
     trans_year = forms.IntegerField(
         label='Transaction Year'
@@ -66,11 +83,15 @@ class PredictionForm(forms.Form):
     def to_dataframe(self):
         """Converts form data to a pandas DataFrame with correct data types."""
         data = {
-            'category': [int(self.cleaned_data['category'])],
             'amt': [float(self.cleaned_data['amt'])],
-            'gender': [int(self.cleaned_data['gender'])],
+            'category': [int(self.cleaned_data['category'])],
+            # 'gender': [int(self.cleaned_data['gender'])],
+            'lat': [float(self.cleaned_data['lat'])],
+            'long': [float(self.cleaned_data['long'])],
+            'merch_lat': [float(self.cleaned_data['merch_lat'])],
+            'merch_long': [float(self.cleaned_data['merch_long'])],
             'city_pop': [int(self.cleaned_data['city_pop'])],
-            'age': [float(self.cleaned_data['age'])],
+            'age': [int(self.cleaned_data['age'])],
             'trans_year': [int(self.cleaned_data['trans_year'])],
             'trans_month': [int(self.cleaned_data['trans_month'])],
             'trans_day': [int(self.cleaned_data['trans_day'])],

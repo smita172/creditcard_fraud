@@ -6,7 +6,7 @@ from creditcard_fraud import settings
 
 # model_path = os.path.join(settings.ML_MODELS_PATH, 'model.pkl')
 # Load the pre-trained model
-with open(r'model2.pkl', 'rb') as model_file:
+with open(r'finalmodel.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
 # Load the predicted dataset
