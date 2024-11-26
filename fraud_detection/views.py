@@ -190,7 +190,7 @@ def csv_visualization(request):
     # csv_file_path = os.path.join(settings.BASE_DIR, 'processed_results_with_predictions.csv')
         data = pd.read_csv(csv_file_path)
 
-        print(data['prediction'].value_counts())
+        # print(data['prediction'].value_counts())
     # 1. Fraud vs Not Fraud
         fraud_counts = data['prediction'].value_counts()
         fraud_plot_path = os.path.join(settings.MEDIA_ROOT, 'fraud_vs_not_fraud.png')
