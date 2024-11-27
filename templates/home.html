@@ -14,9 +14,9 @@
         <a href="#" class="navbar-logo">Fraud Detection</a>
         <div class="navbar-menu">
 {#            <a href="{% url 'home' %}">Home</a>#}
-            <a href="{% url 'input_prediction' %}">Input Prediction</a>
             <a href="{% url 'csv_prediction' %}">CSV Upload</a>
             <a href="{% url 'csv_visualization' %}">File Visualization</a>
+            <a href="{% url 'input_prediction' %}">Input Prediction</a>
         </div>
     </div>
 
@@ -36,15 +36,6 @@
         CSV, or visualize fraud detection insights.
     </p>
     <div class="features">
-        <!-- Input Prediction -->
-        <div class="feature">
-            <img src="{% static 'images/input.jpg' %}" alt="Input Prediction">
-            <h3><a href="{% url 'input_prediction' %}">Input Prediction</a></h3>
-            <p>
-                Enter transaction details to instantly predict if the
-                transaction is fraudulent, allowing quick decision-making.
-            </p>
-        </div>
 
         <!-- CSV File Analysis -->
         <div class="feature">
@@ -63,6 +54,16 @@
             <p>
                 Get comprehensive insights into the fraud detection process
                 through intuitive visualizations.
+            </p>
+        </div>
+        
+        <!-- Input Prediction -->
+        <div class="feature">
+            <img src="{% static 'images/input.jpg' %}" alt="Input Prediction">
+            <h3><a href="{% url 'input_prediction' %}">Input Prediction</a></h3>
+            <p>
+                Enter transaction details to instantly predict if the
+                transaction is fraudulent, allowing quick decision-making.
             </p>
         </div>
     </div>

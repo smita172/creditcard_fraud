@@ -29,32 +29,35 @@ class PredictionForm(forms.Form):
             ('13','travel'),
         ]
     )
-    lat = forms.DecimalField(
-        label='Customer Latitude',
-        max_digits=10,
-        decimal_places=5,
-    )
-    long = forms.DecimalField(
-        label='Customer Longitude',
-        max_digits=10,
-        decimal_places=5,
-    )
-    merch_lat = forms.DecimalField(
-        label='Merchant Latitude',
-        max_digits=10,
-        decimal_places=5,
-    )
-    merch_long = forms.DecimalField(
-        label='Merchant Longitude',
-        max_digits=10,
-        decimal_places=5,
-    )
+    # lat = forms.DecimalField(
+    #     label='Customer Latitude',
+    #     max_digits=10,
+    #     decimal_places=5,
+    # )
+    # long = forms.DecimalField(
+    #     label='Customer Longitude',
+    #     max_digits=10,
+    #     decimal_places=5,
+    # )
+    # merch_lat = forms.DecimalField(
+    #     label='Merchant Latitude',
+    #     max_digits=10,
+    #     decimal_places=5,
+    # )
+    # merch_long = forms.DecimalField(
+    #     label='Merchant Longitude',
+    #     max_digits=10,
+    #     decimal_places=5,
+    # )
     # gender = forms.ChoiceField(
     #     label='Gender',
     #     choices=[(1, 'Male'), (0, 'Female')],
     #     widget=forms.RadioSelect(attrs={'class': 'radio-group'}),
     #     # help_text="Select the gender."
     # )
+
+    customer_city = forms.CharField(label='Customer City', max_length=100)
+    merchant_city = forms.CharField(label='Merchant City', max_length=100)
     city_pop = forms.IntegerField(
         label='City Population',
         # help_text="Enter the population of the city where the transaction took place."
@@ -129,40 +132,40 @@ class PredictionForm(forms.Form):
             raise ValidationError('Distance of customer to merchant must be an decimal.')
         return distance_to_merch
 
-    def clean_lat(self):
-        lat = self.cleaned_data.get('lat')
-        if lat is None or not isinstance(lat, Decimal):
-            raise ValidationError('Customer latitude must be a valid decimal value.')
-        if lat < Decimal('-90') or lat > Decimal('90'):
-            raise ValidationError('Customer latitude must be between -90 and 90.')
-        return lat
+    # def clean_lat(self):
+    #     lat = self.cleaned_data.get('lat')
+    #     if lat is None or not isinstance(lat, Decimal):
+    #         raise ValidationError('Customer latitude must be a valid decimal value.')
+    #     if lat < Decimal('-90') or lat > Decimal('90'):
+    #         raise ValidationError('Customer latitude must be between -90 and 90.')
+    #     return lat
+    #
+    # # Validate Customer Longitude
+    # def clean_long(self):
+    #     long = self.cleaned_data.get('long')
+    #     if long is None or not isinstance(long, Decimal):
+    #         raise ValidationError('Customer longitude must be a valid decimal value.')
+    #     if long < Decimal('-180') or long > Decimal('180'):
+    #         raise ValidationError('Customer longitude must be between -180 and 180.')
+    #     return long
 
-    # Validate Customer Longitude
-    def clean_long(self):
-        long = self.cleaned_data.get('long')
-        if long is None or not isinstance(long, Decimal):
-            raise ValidationError('Customer longitude must be a valid decimal value.')
-        if long < Decimal('-180') or long > Decimal('180'):
-            raise ValidationError('Customer longitude must be between -180 and 180.')
-        return long
-
-    # Validate Merchant Latitude
-    def clean_merch_lat(self):
-        merch_lat = self.cleaned_data.get('merch_lat')
-        if merch_lat is None or not isinstance(merch_lat, Decimal):
-            raise ValidationError('Merchant latitude must be a valid decimal value.')
-        if merch_lat < Decimal('-90') or merch_lat > Decimal('90'):
-            raise ValidationError('Merchant latitude must be between -90 and 90.')
-        return merch_lat
-
-    # Validate Merchant Longitude
-    def clean_merch_long(self):
-        merch_long = self.cleaned_data.get('merch_long')
-        if merch_long is None or not isinstance(merch_long, Decimal):
-            raise ValidationError('Merchant longitude must be a valid decimal value.')
-        if merch_long < Decimal('-180') or merch_long > Decimal('180'):
-            raise ValidationError('Merchant longitude must be between -180 and 180.')
-        return merch_long
+    # # Validate Merchant Latitude
+    # def clean_merch_lat(self):
+    #     merch_lat = self.cleaned_data.get('merch_lat')
+    #     if merch_lat is None or not isinstance(merch_lat, Decimal):
+    #         raise ValidationError('Merchant latitude must be a valid decimal value.')
+    #     if merch_lat < Decimal('-90') or merch_lat > Decimal('90'):
+    #         raise ValidationError('Merchant latitude must be between -90 and 90.')
+    #     return merch_lat
+    #
+    # # Validate Merchant Longitude
+    # def clean_merch_long(self):
+    #     merch_long = self.cleaned_data.get('merch_long')
+    #     if merch_long is None or not isinstance(merch_long, Decimal):
+    #         raise ValidationError('Merchant longitude must be a valid decimal value.')
+    #     if merch_long < Decimal('-180') or merch_long > Decimal('180'):
+    #         raise ValidationError('Merchant longitude must be between -180 and 180.')
+    #     return merch_long
 
     def clean(self):
         cleaned_data = super().clean()

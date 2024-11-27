@@ -207,39 +207,55 @@
 {#            </div>#}
 
                         <!-- Customer Latitude -->
+{#            <div class="form-group">#}
+{#                <label for="lat">Customer Latitude </label>#}
+{#                {{ form.lat }}#}
+{#                <div class="error">{{ form.lat.errors }}</div>#}
+{#                <span class="tooltip">Select the latitude (e.g., 42.5545,33.615, etc.)</span>#}
+{#            </div>#}
+{##}
+{#                                    <!-- Customer Longitude -->#}
+{#            <div class="form-group">#}
+{#                <label for="lat">Customer Longitude </label>#}
+{#                {{ form.long }}#}
+{#                <div class="error">{{ form.long.errors }}</div>#}
+{#                <span class="tooltip">Select the latitude (e.g., -90.3508, -117.711, etc.)</span>#}
+{#            </div>#}
+{##}
+{##}
+{#                                    <!-- Merchant Latitude -->#}
+{#            <div class="form-group">#}
+{#                <label for="merch_lat">Merchant Latitude </label>#}
+{#                {{ form.merch_lat }}#}
+{#                <div class="error">{{ form.merch_lat.errors }}</div>#}
+{#                <span class="tooltip">Select the latitude (e.g., 42.46113,34.53057, etc.)</span>#}
+{#            </div>#}
+{##}
+{#                                    <!-- Merchant Longitude -->#}
+{#            <div class="form-group">#}
+{#                <label for="merch_long">Merchant Longitude </label>#}
+{#                {{ form.merch_long }}#}
+{#                <div class="error">{{ form.merch_long.errors }}</div>#}
+{#                <span class="tooltip">Select the latitude (e.g., -91.1471, -118.022, etc.)</span>#}
+{#            </div>#}
+
+            
+                        <!-- Customer City -->
             <div class="form-group">
-                <label for="lat">Customer Latitude </label>
-                {{ form.lat }}
-                <div class="error">{{ form.lat.errors }}</div>
-                <span class="tooltip">Select the latitude (e.g., 42.5545,33.615, etc.)</span>
+                <label for="customer_city">Customer City</label>
+                {{ form.customer_city }}
+                <div class="error">{{ form.customer_city.errors }}</div>
+                <span class="tooltip">Enter the name of the city where the transaction originated (e.g., Toronto, Vancouver).</span>
             </div>
-
-                                    <!-- Customer Longitude -->
+            
+            <!-- Merchant City -->
             <div class="form-group">
-                <label for="lat">Customer Longitude </label>
-                {{ form.long }}
-                <div class="error">{{ form.long.errors }}</div>
-                <span class="tooltip">Select the latitude (e.g., -90.3508, -117.711, etc.)</span>
+                <label for="merchant_city">Merchant City</label>
+                {{ form.merchant_city }}
+                <div class="error">{{ form.merchant_city.errors }}</div>
+                <span class="tooltip">Enter the name of the merchant's city (e.g., Montreal, Calgary).</span>
             </div>
-
-
-                                    <!-- Merchant Latitude -->
-            <div class="form-group">
-                <label for="merch_lat">Merchant Latitude </label>
-                {{ form.merch_lat }}
-                <div class="error">{{ form.merch_lat.errors }}</div>
-                <span class="tooltip">Select the latitude (e.g., 42.46113,34.53057, etc.)</span>
-            </div>
-
-                                    <!-- Merchant Longitude -->
-            <div class="form-group">
-                <label for="merch_long">Merchant Longitude </label>
-                {{ form.merch_long }}
-                <div class="error">{{ form.merch_long.errors }}</div>
-                <span class="tooltip">Select the latitude (e.g., -91.1471, -118.022, etc.)</span>
-            </div>
-
-
+                        
             <!-- City Population Field -->
             <div class="form-group">
                 <label for="id_city_pop">City Population</label>
