@@ -83,46 +83,46 @@ def input_prediction(request):
             transaction_data = form.cleaned_data
 
             # Extract customer and merchant city names
-            customer_city = transaction_data.get('customer_city')
-            merchant_city = transaction_data.get('merchant_city')
+            # customer_city = transaction_data.get('customer_city')
+            # merchant_city = transaction_data.get('merchant_city')
 
-            try:
-                # Fetch coordinates for both cities
-                cust_lat, cust_lon = get_coordinates(customer_city)
-                merch_lat, merch_lon = get_coordinates(merchant_city)
-
-                # Calculate distance using Haversine formula
-                distance_to_merch = haversine(cust_lat, cust_lon, merch_lat, merch_lon)
-
-                # Add calculated fields to the transaction data
-                transaction_data['lat'] = cust_lat
-                transaction_data['long'] = cust_lon
-                transaction_data['merch_lat'] = merch_lat
-                transaction_data['merch_long'] = merch_lon
-                transaction_data['distance_to_merch'] = distance_to_merch
-
-            except ValueError as e:
-                # Handle invalid city names
-                form.add_error(None, f"Error: {str(e)}")
-                return render(request, 'input_prediction.html', {'form': form})
-            except Exception as e:
-                # Handle API or other errors
-                messages.error(request, f"An error occurred: {str(e)}")
-                return redirect('input_prediction')
-
-                # Convert form data to DataFrame and filter only expected columns
-            input_df = form.to_dataframe()
-            expected_columns = [
-                'amt', 'category', 'lat', 'long', 'merch_lat', 'merch_long', 'city_pop', 'age',
-                'trans_year', 'trans_month', 'trans_day', 'trans_hour', 'distance_to_merch'
-            ]
-
-            # Add the dynamically calculated values to the DataFrame
-            input_df['lat'] = cust_lat
-            input_df['long'] = cust_lon
-            input_df['merch_lat'] = merch_lat
-            input_df['merch_long'] = merch_lon
-            input_df['distance_to_merch'] = distance_to_merch
+            # try:
+            #     # Fetch coordinates for both cities
+            #     cust_lat, cust_lon = get_coordinates(customer_city)
+            #     merch_lat, merch_lon = get_coordinates(merchant_city)
+            #
+            #     # Calculate distance using Haversine formula
+            #     distance_to_merch = haversine(cust_lat, cust_lon, merch_lat, merch_lon)
+            #
+            #     # Add calculated fields to the transaction data
+            #     transaction_data['lat'] = cust_lat
+            #     transaction_data['long'] = cust_lon
+            #     transaction_data['merch_lat'] = merch_lat
+            #     transaction_data['merch_long'] = merch_lon
+            #     transaction_data['distance_to_merch'] = distance_to_merch
+            #
+            # except ValueError as e:
+            #     # Handle invalid city names
+            #     form.add_error(None, f"Error: {str(e)}")
+            #     return render(request, 'input_prediction.html', {'form': form})
+            # except Exception as e:
+            #     # Handle API or other errors
+            #     messages.error(request, f"An error occurred: {str(e)}")
+            #     return redirect('input_prediction')
+            #
+            #     # Convert form data to DataFrame and filter only expected columns
+            # input_df = form.to_dataframe()
+            # expected_columns = [
+            #     'amt', 'category', 'lat', 'long', 'merch_lat', 'merch_long', 'city_pop', 'age',
+            #     'trans_year', 'trans_month', 'trans_day', 'trans_hour', 'distance_to_merch'
+            # ]
+            #
+            # # Add the dynamically calculated values to the DataFrame
+            # input_df['lat'] = cust_lat
+            # input_df['long'] = cust_lon
+            # input_df['merch_lat'] = merch_lat
+            # input_df['merch_long'] = merch_lon
+            # input_df['distance_to_merch'] = distance_to_merch
 
             # Convert form data to DataFrame and filter only expected columns
             input_df = form.to_dataframe()

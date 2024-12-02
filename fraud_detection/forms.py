@@ -29,26 +29,26 @@ class PredictionForm(forms.Form):
             ('13','travel'),
         ]
     )
-    # lat = forms.DecimalField(
-    #     label='Customer Latitude',
-    #     max_digits=10,
-    #     decimal_places=5,
-    # )
-    # long = forms.DecimalField(
-    #     label='Customer Longitude',
-    #     max_digits=10,
-    #     decimal_places=5,
-    # )
-    # merch_lat = forms.DecimalField(
-    #     label='Merchant Latitude',
-    #     max_digits=10,
-    #     decimal_places=5,
-    # )
-    # merch_long = forms.DecimalField(
-    #     label='Merchant Longitude',
-    #     max_digits=10,
-    #     decimal_places=5,
-    # )
+    lat = forms.DecimalField(
+        label='Customer Latitude',
+        max_digits=10,
+        decimal_places=5,
+    )
+    long = forms.DecimalField(
+        label='Customer Longitude',
+        max_digits=10,
+        decimal_places=5,
+    )
+    merch_lat = forms.DecimalField(
+        label='Merchant Latitude',
+        max_digits=10,
+        decimal_places=5,
+    )
+    merch_long = forms.DecimalField(
+        label='Merchant Longitude',
+        max_digits=10,
+        decimal_places=5,
+    )
     # gender = forms.ChoiceField(
     #     label='Gender',
     #     choices=[(1, 'Male'), (0, 'Female')],
@@ -56,8 +56,8 @@ class PredictionForm(forms.Form):
     #     # help_text="Select the gender."
     # )
 
-    customer_city = forms.CharField(label='Customer City', max_length=100)
-    merchant_city = forms.CharField(label='Merchant City', max_length=100)
+    # customer_city = forms.CharField(label='Customer City', max_length=100)
+    # merchant_city = forms.CharField(label='Merchant City', max_length=100)
     city_pop = forms.IntegerField(
         label='City Population',
         # help_text="Enter the population of the city where the transaction took place."
