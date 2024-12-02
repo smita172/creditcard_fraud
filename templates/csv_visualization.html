@@ -5,13 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV Data Visualization Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <style>
         body {
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
         }
-        /* Navbar styling */
+
         .navbar {
             background-color: #222;
             color: white;
@@ -40,96 +42,88 @@
         .navbar-menu a:hover {
             color: #00bcd4;
         }
+
         .dashboard-container {
             margin-top: 20px;
         }
+
         .card {
             margin-bottom: 20px;
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+
         h1 {
             text-align: center;
             margin-bottom: 30px;
+            color: #00bcd4 !important;
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <div class="navbar">
         <a href="{% url 'home'%}" class="navbar-logo">Fraud Detection</a>
         <div class="navbar-menu">
             <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'csv_prediction' %}">CSV Upload</a>
             <a href="{% url 'input_prediction' %}">Input Prediction</a>
-{#            <a href="{% url 'csv_visualization' %}">File Visualization</a>#}
         </div>
     </div>
-    
+
     <div class="container">
-        <h1 class="text-primary">CSV Data Visualization Dashboard</h1>
+        <h1>CSV Data Visualization Dashboard</h1>
+
+        {% if error_message %}
+        <div class="alert alert-danger text-center" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+
         <div class="dashboard-container row">
-
-             <div class="container mt-4">
-    {% if error_message %}
-    <div class="alert alert-danger text-center" role="alert">
-        {{ error_message }}
-    </div>
-    {% endif %}
-    </div>
-
-
-            <!-- Fraud vs Not Fraud Section -->
+            <!-- Fraud vs Not Fraud -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="text-secondary text-center">Fraud vs Not Fraud</h2>
-                        <img src="{{ fraud_plot_url }}" alt="Fraud vs Not Fraud Plot">
+                        <canvas id="fraudChart"></canvas>
                     </div>
                 </div>
             </div>
 
-            <!-- Transaction Amount Distribution -->
+            <!-- Transaction Amount Distribution (Fraudulent) -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="text-secondary text-center">Transaction Amount Distribution</h2>
-                        <img src="{{ amt_dist_plot_url }}" alt="Transaction Amount Distribution Plot">
+                        <h2 class="text-secondary text-center">Transaction Amount Distribution (Fraudulent)</h2>
+                        <canvas id="amtFraudulentChart"></canvas>
                     </div>
                 </div>
             </div>
 
-{#            <!-- Gender-wise Fraud Analysis -->#}
-{#            <div class="col-md-6">#}
-{#                <div class="card">#}
-{#                    <div class="card-body">#}
-{#                        <h2 class="text-secondary text-center">Gender-wise Fraud Analysis</h2>#}
-{#                        <img src="{{ gender_fraud_plot_url }}" alt="Gender-wise Fraud Analysis Plot">#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
+            <!-- Transaction Amount Distribution (Non-Fraudulent) -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-secondary text-center">Transaction Amount Distribution (Non-Fraudulent)</h2>
+                        <canvas id="amtNonFraudulentChart"></canvas>
+                    </div>
+                </div>
+            </div>
 
             <!-- Transaction Volume by Month -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="text-secondary text-center">Transaction Volume by Month</h2>
-                        <img src="{{ month_plot_url }}" alt="Transaction Volume by Month Plot">
+                        <canvas id="monthChart"></canvas>
                     </div>
                 </div>
             </div>
 
-            <!-- Transaction Amount by Category -->
+            <!-- Number of Fraud by Category -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h2 class="text-secondary text-center">Number of Fraud by Category</h2>
-                        <img src="{{ category_fraud_plot_url }}" alt="Number of Fraud by Category Plot">
+                        <canvas id="categoryFraudChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -139,64 +133,151 @@
                 <div class="card">
                     <div class="card-body">
                         <h2 class="text-secondary text-center">Distance to Merchant Distribution</h2>
-                        <img src="{{ dist_plot_url }}" alt="Distance to Merchant Distribution Plot">
+                        <canvas id="distanceChart"></canvas>
                     </div>
                 </div>
             </div>
 
-            <!-- Age Distribution -->
+                        <!-- Distance to Merchant Distribution Fraudulent-->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="text-secondary text-center">Age Distribution</h2>
-                        <img src="{{ age_plot_url }}" alt="Age Distribution Plot">
+                        <h2 class="text-secondary text-center">Distance to Merchant Distribution</h2>
+                        <canvas id="frauddistanceData"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Age Distribution (All) -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-secondary text-center">Age Distribution (All)</h2>
+                        <canvas id="ageChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Age Distribution (Fraudulent Transactions) -->
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="text-secondary text-center">Age Distribution (Fraudulent Transactions)</h2>
+                        <canvas id="fraudulentAgeChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-{#    {% if errors %}#}
-{#    <ul>#}
-{#        {% for error in errors %}#}
-{#            <li>{{ error }}</li>#}
-{#        {% endfor %}#}
-{#    </ul>#}
-{#{% endif %}#}
-           <!-- Toggleable Category Table -->
-{#        <div class="table-container text-center my-4">#}
-{#            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#categoryTable" aria-expanded="false" aria-controls="categoryTable">#}
-{#                Show Category Details#}
-{#            </button>#}
-{#            <div class="collapse" id="categoryTable">#}
-{#                <div class="card mt-3">#}
-{#                    <div class="card-body">#}
-{#                        <h3 class="text-secondary">Category Details</h3>#}
-{#                        <table class="table table-bordered">#}
-{#                            <thead>#}
-{#                                <tr>#}
-{#                                    <th>Category ID</th>#}
-{#                                    <th>Description</th>#}
-{#                                </tr>#}
-{#                            </thead>#}
-{#                            <tbody>#}
-{#                                {% for category in CATEGORIES %}#}
-{#                                <tr>#}
-{#                                    <td>{{ category.id }}</td>#}
-{#                                    <td>{{ category.description }}</td>#}
-{#                                </tr>#}
-{#                                {% endfor %}#}
-{#                            </tbody>#}
-{#                        </table>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
+
+    <script>
+        // Utility function to render charts
+        {#function renderChart(ctxId, chartData, chartTitle) {#}
+        {#    const ctx = document.getElementById(ctxId).getContext('2d');#}
+        {#    new Chart(ctx, {#}
+        {#        type: 'bar',#}
+        {#        data: {#}
+        {#            labels: chartData.labels,#}
+        {#            datasets: [{#}
+        {#                label: chartTitle,#}
+        {#                data: chartData.data,#}
+        {#                backgroundColor: 'rgba(89,0,20,0.2)',#}
+        {#                borderColor: 'rgb(255,0,54)',#}
+        {#                borderWidth: 1#}
+        {#            }]#}
+        {#        },#}
+        {#        options: {#}
+        {#            responsive: true,#}
+        {#            plugins: {#}
+        {#                legend: { display: false },#}
+        {#                title: { display: true, text: chartTitle }#}
+        {#            },#}
+        {#            scales: {#}
+        {#                y: { beginAtZero: true }#}
+        {#            }#}
+        {#        }#}
+        {#    });#}
+        {# } #}
+
+        function renderChart(ctxId, chartData, chartTitle) {
+    const ctx = document.getElementById(ctxId).getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: chartData.labels,
+            datasets: [{
+                label: chartTitle,
+                data: chartData.data,
+                backgroundColor: 'rgba(89,0,20,0.2)',
+                borderColor: 'rgb(255,0,54)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                title: { display: true, text: chartTitle },
+                datalabels: {
+                    anchor: 'end',
+                    align: 'end',
+                    formatter: (value) => `${value.toFixed(1)}`, // Format as percentage
+                    color: 'black',
+                    font: {
+                        weight: 'bold'
+                    }
+                }
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        },
+        plugins: [ChartDataLabels] // Register the datalabels plugin
+    });
+}
+
+        // Fraud data rendering
+        const fraudData = JSON.parse('{{ fraud_data | escapejs }}');
+        if (fraudData.data.length === 0 || fraudData.labels.length === 0) {
+            renderChart('fraudChart', { labels: ['No Transactions'], data: [0] }, 'Fraud vs Not Fraud');
+        } else {
+            renderChart('fraudChart', fraudData, 'Fraud vs Not Fraud');
+        }
+
+        // Transaction amount for fraudulent data
+        const amtFraudulentData = JSON.parse('{{ amt_fraudulent_data | escapejs }}');
+        renderChart('amtFraudulentChart', amtFraudulentData, 'Transaction Amount Distribution (Fraudulent)');
+
+        // Transaction amount for non-fraudulent data
+        const amtNonFraudulentData = JSON.parse('{{ amt_non_fraudulent_data | escapejs }}');
+        renderChart('amtNonFraudulentChart', amtNonFraudulentData, 'Transaction Amount Distribution (Non-Fraudulent)');
+
+        // Transaction volume by month
+        const monthData = JSON.parse('{{ month_data | escapejs }}');
+        renderChart('monthChart', monthData, 'Transaction Volume by Month');
+
+        // Fraud count by category
+        const categoryFraudData = JSON.parse('{{ category_fraud_data | escapejs }}');
+        renderChart('categoryFraudChart', categoryFraudData, 'Number of Fraud by Category');
+
+        // Distance to Merchant data
+        const distanceData = JSON.parse('{{ distance_data | escapejs }}');
+        renderChart('distanceChart', distanceData, 'Distance to Merchant Distribution (KMs)');
 
 
+        const frauddistanceData = JSON.parse('{{ fraud_distance_data | escapejs }}');
+        renderChart('frauddistanceData', frauddistanceData, 'Distance to Merchant Distribution (KMs)');
 
+        // Age data for all transactions
+        const ageData = JSON.parse('{{ age_data | escapejs }}');
+        renderChart('ageChart', ageData, 'Age Distribution (All)');
 
+        // Age data for fraudulent transactions
+        const fraudulentAgeData = JSON.parse('{{ fraudulent_age_chart_data | escapejs }}');
+        renderChart('fraudulentAgeChart', fraudulentAgeData, 'Age Distribution (Fraudulent Transactions)');
+    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
