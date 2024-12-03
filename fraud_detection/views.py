@@ -8,6 +8,7 @@ from .forms import CSVUploadForm
 from django.http import HttpResponse
 from django.conf import settings
 import pandas as pd
+import numpy as np
 import os
 import matplotlib.pyplot as plt
 import joblib
@@ -245,7 +246,8 @@ def csv_visualization(request):
             # Normalize to percentages
             fraud_data = {
                 "labels": fraud_counts.index.tolist(),
-                "data": [(count / total_transactions) * 100 for count in fraud_counts.values],
+                # "data": [(count / total_transactions) * 100 for count in fraud_counts.values],
+                "data": fraud_counts.values.tolist(),
                 # Normalize to percentage
             }
 
@@ -253,7 +255,10 @@ def csv_visualization(request):
         fraudulent_transactions = data[data['prediction'] == 'Fraudulent']
         non_fraudulent_transactions = data[data['prediction'] == 'Not Fraudulent']
         if not fraudulent_transactions.empty:
-            amt_fraudulent_distribution = fraudulent_transactions['amt'].value_counts(bins=5, sort=False)
+            f_min_amt = fraudulent_transactions['amt'].min()  # Find the minimum value
+            f_max_amt = fraudulent_transactions['amt'].max()  # Find the maximum value
+            f_bin_edges = np.linspace(f_min_amt, f_max_amt, 6)
+            amt_fraudulent_distribution = fraudulent_transactions['amt'].value_counts(bins=f_bin_edges, sort=False)
             amt_fraudulent_data = {
                 "labels": [f"{int(bin.left)}-{int(bin.right)}" for bin in amt_fraudulent_distribution.index],
                 "data": [(count / amt_fraudulent_distribution.sum()) * 100 for count in
@@ -267,7 +272,10 @@ def csv_visualization(request):
 
             # Handle Non-Fraudulent transactions
         if not non_fraudulent_transactions.empty:
-            amt_non_fraudulent_distribution = non_fraudulent_transactions['amt'].value_counts(bins=5, sort=False)
+            min_amt = non_fraudulent_transactions['amt'].min()  # Find the minimum value
+            max_amt = non_fraudulent_transactions['amt'].max()  # Find the maximum value
+            bin_edges = np.linspace(min_amt, max_amt, 6)
+            amt_non_fraudulent_distribution = non_fraudulent_transactions['amt'].value_counts(bins=bin_edges, sort=False)
             amt_non_fraudulent_data = {
                 "labels": [f"{int(bin.left)}-{int(bin.right)}" for bin in amt_non_fraudulent_distribution.index],
                 "data": [(count / amt_non_fraudulent_distribution.sum()) * 100 for count in
