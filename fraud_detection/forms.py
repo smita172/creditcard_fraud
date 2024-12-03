@@ -7,7 +7,7 @@ class PredictionForm(forms.Form):
     amt = forms.DecimalField(
         label='Transaction Amount',
         max_digits=10,
-        decimal_places=6,
+        decimal_places=2,
         # help_text="Enter the transaction amount."
     )
     category = forms.ChoiceField(
